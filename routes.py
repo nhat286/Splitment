@@ -16,9 +16,14 @@ def user_profile():
         return {'name': roles.current_user[3], 'email': roles.current_user[1], 'address': roles.current_user[4], 'rating': roles.current_user[5]}
     return None
 
+def user_group():
+    if roles.current_id > -1:
+        return db.get_groups(roles.current_id)
+    return None
+
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', user=user_profile())
+    return render_template('index.html', user=user_profile(), groups=user_group())
 
 
 @app.route('/login', methods=['POST','GET'])
@@ -47,6 +52,20 @@ def signup():
         return redirect(url_for('index'))
     return render_template('signup.html', error=0)
 
+
+
+@app.route('/createAccount', methods=['POST','GET'])
+def createAccount():
+	if request.method == 'POST':
+		email = request.form['email']
+		password = request.form['password']
+		name = request.form['name']
+		address = request.form['address']	
+		user = new 	
+		# system.loginUser(user, password)
+		
+		return render_template('home.html')
+	return render_template('createAccount.html')
 @app.route('/createGroup', methods=['POST','GET'])
 def createGroup():
     if request.method == 'POST':

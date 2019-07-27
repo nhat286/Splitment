@@ -155,14 +155,17 @@ def add_item(user, item):
         cursor.close()
         conn.close()
 
-def get_orders():
+def get_orders(user):
     conn   = db_connect()
     cursor = conn.cursor(dictionary=True, buffered=True)
-    query  = ("SELECT * FROM Orders")
+    query  = ("SELECT * FROM Orders"
+            "WHERE group_id=("
+            "SELECT group_id FROM GroupMembers"
+            "WHERE user_id=%s)")
     orders = []
     
     try:
-        cursor.execute(query)
+        cursor.execute(query, user)
         for row in cursor:
             orders.append(row.copy())
     except Exception as ex:
@@ -174,14 +177,17 @@ def get_orders():
     
     return orders
 
-def get_groups():
+def get_groups(user):
     conn   = db_connect()
     cursor = conn.cursor(dictionary=True, buffered=True)
-    query  = ("SELECT * FROM Groups")
+    query  = ("SELECT * FROM Groups"
+            "WHERE id=("
+            "SELECT group_id FROM GroupMembers"
+            "WHERE user_id=%s)")
     groups = []
     
     try:
-        cursor.execute(query)
+        cursor.execute(query, user)
         for row in cursor:
             groups.append(row.copy())
     except Exception as ex:

@@ -69,11 +69,28 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <div class="w3-white">
             <button onclick="myFunction('profile-groups-curr')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Current Groups</button>
             <div id="profile-groups-curr" class="w3-hide w3-container">
-              <p>Nothing yet.</p>
+              {% if groups %}
+                {% for group in groups %}
+                  {% if group.deadline %} <!-- check for deadline to view current active groups -->
+                  <li>{{group}}</li>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <p>Nothing yet.</p>
+              {% endif %}
+              }
             </div>
             <button onclick="myFunction('profile-groups-past')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Past Groups</button>
             <div id="profile-groups-past" class="w3-hide w3-container">
-              <p>Nothing yet.</p>
+              {% if groups %}
+                {% for group in groups %}
+                  {% if group.deadline %} <!-- check for deadline to view past groups -->
+                  <li>{{group}}</li>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                <p>Nothing yet.</p>
+              {% endif %}
             </div>
           </div>      
         </div>
