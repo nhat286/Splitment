@@ -49,13 +49,13 @@ def check_login(email, password):
         cursor.close()
         conn.close()
 
-def get_user(user_id):
+def get_user(user):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
     query  = ("SELECT * from Users "
-            "WHERE id=%s ")
+            "WHERE email=%s ")
     try:
-        cursor.execute(query, (user_id))
+        cursor.execute(query, (user))
         rows = cursor.fetchone()
         if rows:
             return rows
@@ -88,7 +88,7 @@ def add_group(group):
         insert_id = cursor.lastrowid
         print("Inserted user with id: " + str(insert_id))
         conn.commit()
-        return insert_id
+        return group_id
     except Exception as ex:
         print(ex)
         return -1
@@ -101,7 +101,7 @@ def add_member(group, member):
     cursor = conn.cursor(buffered=True)
     query  = ("INSERT INTO GroupMembers "
             "(group_id, user_id) "
-            "VALUES (%(group_id)s, %(user_id)s) ")
+            "VALUES (%s, %s) ")
     try:
         cursor.execute(query, (group, member))
         insert_id = cursor.lastrowid
@@ -115,15 +115,15 @@ def add_member(group, member):
         cursor.close()
         conn.close()
 
-# shop = { location, name, link }
-def add_order(group, shop, deadline):
+# order = {group_id, deadline, location, retail_name, retail_link }
+def add_order(order):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
     query  = ("INSERT INTO Orders "
             "(group_id, deadline, location, retail_name, retail_link) "
             "VALUES (%(group_id)s, %(deadline)s, %(location)s, %(retail_name)s, %(retail_link)s) ")
     try:
-        cursor.execute(query, (group, deadline, shop))
+        cursor.execute(query, (order))
         insert_id = cursor.lastrowid
         print("Inserted user with id: " + str(insert_id))
         conn.commit()

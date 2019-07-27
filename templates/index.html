@@ -3,8 +3,13 @@
 <title>Splitment</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="templates/css/w3.css"> <!-- https://www.w3schools.com/w3css/4/w3.css -->
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<!-- <link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/w3.css"> 
+<link rel="stylesheet" href="css/w3-theme.css"> -->
+<!-- https://www.w3schools.com/w3css/4/w3.css -->
+<link rel="stylesheet" href="templates/css/extra.css">
+<link rel="stylesheet" href="templates/css/w3.css"> 
+<link rel="stylesheet" href="templates/css/w3-theme.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,7 +22,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Splitment</a>
+  <a href="/" class="w3-bar-item w3-button w3-theme-d4"><img src="templates/icons/logo-white.png" alt="Splitment" class="w3-left w3-margin-right" style="width:100px"></a>
   
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications" id="navbar-notif"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">1</span></button>     
@@ -75,7 +80,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <br>
 
         <div class="w3-card w3-round w3-white">
-          <button class="w3-button w3-block w3-left-align"><i class="fa fa-plus fa-fw w3-margin-right"></i>New Group Order</button>
+          <a href="createGroup" class="w3-button w3-block w3-left-align"><i class="fa fa-plus fa-fw w3-margin-right"></i>New Group Order</a>
         </div>
       <!-- End Left Column -->
       {% endif %}
@@ -92,9 +97,12 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
               <h5 class="w3-opacity">We split the payment of your shipment. Find a group order below or start your own!</h5>
               <!-- <p contenteditable="true" class="w3-border w3-padding" ></p>
               <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
-              <input class="w3-input" type="text" placeholder="Your location..." id="search-input-loc"></input>
-              <input class="w3-input" type="text" placeholder="Your item..." id="search-input-item"></input>
-              <button type="button" class="w3-button w3-theme" id="search-input-btn"><i class="fa fa-search"></i>  Search</button>
+              <form method="POST" action="search">
+                <input class="w3-input" type="text" placeholder="Your location..." id="search-input-loc" name="search-input-loc"></input>
+                <input class="w3-input" type="text" placeholder="Your item..." id="search-input-item" name="search-input-item"></input>
+                <br>
+                <button type="submit" class="w3-button w3-theme" id="search-input-btn"><i class="fa fa-search"></i>  Search</button>
+              </form>
             </div>
           </div>
         </div>
@@ -104,11 +112,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <img src="templates/icons/user.svg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
         <span class="w3-right w3-opacity">16 min ago</span>
         <h4>Jane Doe</h4><h6>Rating: 5</h6>
-        <br>
         <hr class="w3-clear">
-        <p>Website:</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+        <p>Online Retailer:</p>
+        <p>Online Retailer URL:</p>
+        <p>Online Retailer URL:</p>
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
       </div>
       
     <!-- End Middle Column -->
@@ -122,12 +130,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <br>
 
 <!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>Splitment</h5>
-</footer>
-
 <footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <img src="templates/icons/logo-white.png" alt="Splitment" class="w3-right w3-margin-right w3-padding-large" style="width:150px">
 </footer>
  
 <script>

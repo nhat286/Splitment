@@ -3,8 +3,12 @@
 <title>Splitment</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- https://www.w3schools.com/w3css/4/w3.css -->
+<!-- <link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/w3.css"> 
+<link rel="stylesheet" href="css/w3-theme.css"> -->
 <link rel="stylesheet" href="templates/css/extra.css">
-<link rel="stylesheet" href="templates/css/w3.css"> <!-- https://www.w3schools.com/w3css/4/w3.css -->
+<link rel="stylesheet" href="templates/css/w3.css"> 
 <link rel="stylesheet" href="templates/css/w3-theme.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <!-- Icons -->
@@ -32,7 +36,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
   <a href="/logout" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
     <i class="fa fa-power-off fa-fw w3-margin-right w3-text-theme"></i>Logout
   </a>
-  <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
+  <a href="/login" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
     <i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Login/Signup
   </a>
  </div>
@@ -47,43 +51,27 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     <!-- Middle Column -->
     <div class="w3-col m12" >
     
-      <div class="w3-row-padding" id="login">
+      <div class="w3-row-padding" id="ngo">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <h3 class="w3-opacity">Log in to begin...</h3>
+              <h3 class="w3-opacity">Create new group order!</h3>
               <!-- <p contenteditable="true" class="w3-border w3-padding" ></p>
               <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
-              <form method="POST" action="login">
-                <input class="w3-input" type="text" placeholder="Email" id="login-email" name="login-email" display="inline-block"></input>
-                <input class="w3-input" type="password" placeholder="Password" id="login-password" name="login-password"></input>
-                <button type="submit" class="w3-button w3-theme" id="login-input-btn"><i class="fa fa-arrow-circle-right"></i>  Login</button>
+              <form method="POST">
+                <input class="w3-input" type="text" placeholder="Online Retailer to Order From" id="ngo-order" name="ngo-order"></input>
+                <input class="w3-input" type="url" placeholder="Online Retailer URL" id="ngo-order-url" name="ngo-order-url"></input>
+                <input class="w3-input" type="text" placeholder="Location to Deliver" id="ngo-location" name="ngo-location"></input>
+                <input class="w3-input" type="text" placeholder="Date to End Group Order dd/mm/yy" id="ngo-deadline" name="ngo-deadline"></input>
+                <input class="w3-input" type="number" placeholder="Number of People to Order With" id="ngo-members" name="ngo-members"></input>
+                <br>
+                <button type="submit" class="w3-button w3-theme" id="ngo-btn"><i class="fa fa-plus-circle"></i>  Create</button>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <br>
-      <div class="w3-row-padding" id="register">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <h3 class="w3-opacity">Sign up to begin...</h3>
-              <!-- <p contenteditable="true" class="w3-border w3-padding" ></p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
-              <form method="POST" action="signup">
-                <input class="w3-input" type="text" placeholder="Name" id="signup-name" name="signup-name" display="inline-block"></input>
-                <input class="w3-input" type="email" placeholder="Email" id="signup-email" name="signup-email" display="inline-block"></input>
-                <input class="w3-input" type="text" placeholder="Address" id="signup-address" name="signup-address"></input>
-                <input class="w3-input" type="password" placeholder="Password" id="signup-password" name="signup-password"></input>
-                <input class="w3-input" type="password" placeholder="Confirm Password" id="signup-password-confirm" name="signup-password-confirm"></input>
-                <button type="submit" class="w3-button w3-theme" id="signup-input-btn"><i class="fa fa-arrow-circle-right"></i>  Signup</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+
     <!-- End Middle Column -->
     </div>
     
