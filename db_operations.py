@@ -49,21 +49,21 @@ def check_login(email, password):
         cursor.close()
         conn.close()
 
-def get_user(user):
+def get_user(id):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
     query  = ("SELECT * from Users "
-            "WHERE email=%s ")
+            "WHERE id=%(id)s ")
     try:
-        cursor.execute(query, (user))
+        cursor.execute(query, id)
         rows = cursor.fetchone()
         if rows:
-            return rows
+            return 0, rows
         else:
-            return -1
+            return -1, None
     except Exception as ex:
         print(ex)
-        return -1
+        return -1, None
     finally:
         cursor.close()
         conn.close()
@@ -155,47 +155,97 @@ def add_item(user, item):
         cursor.close()
         conn.close()
 
-def get_orders(user):
+def get_orders(user_id):
     conn   = db_connect()
     cursor = conn.cursor(dictionary=True, buffered=True)
-    query  = ("SELECT * FROM Orders"
+    query  = ("SELECT * FROM Orders "
             "WHERE group_id=("
-            "SELECT group_id FROM GroupMembers"
-            "WHERE user_id=%s)")
+            "SELECT group_id FROM GroupMembers "
+            "WHERE user_id=%(user_id)s)")
     orders = []
     
     try:
-        cursor.execute(query, user)
+        cursor.execute(query, user_id)
         for row in cursor:
             orders.append(row.copy())
     except Exception as ex:
         print(ex)
-        return -1
+        return -1, None
     finally:
         cursor.close()
         conn.close()
     
-    return orders
+    return 0, orders
 
-def get_groups(user):
+def get_group_info(id):
     conn   = db_connect()
     cursor = conn.cursor(dictionary=True, buffered=True)
-    query  = ("SELECT * FROM Groups"
-            "WHERE id=("
-            "SELECT group_id FROM GroupMembers"
-            "WHERE user_id=%s)")
+    query  = ("SELECT * FROM Groups "
+            "WHERE id= " + str(id))
+    
+    try:
+        cursor.execute(query)
+        for row in cursor:
+            if row:
+                return 0, row
+    except Exception as ex:
+        print(ex)
+        return -1, None
+    finally:
+        cursor.close()
+        conn.close()
+    
+    return -1, None
+
+def get_total_groups(user):
+    err, curr_group = get_groups(user)
+    if err == -1:
+        return -1, None
+    groups = []
+    for group in curr_group:
+        err, info = get_group_info(group['group_id'])
+        if err == -1:
+            break
+        groups.append(info)
+    return 0, groups
+
+def get_group_members(group_id):
+    conn   = db_connect()
+    cursor = conn.cursor(dictionary=True, buffered=True)
+    query  = ("SELECT * FROM GroupMembers "
+            "WHERE group_id=%(group_id)s")
     groups = []
     
     try:
-        cursor.execute(query, user)
+        cursor.execute(query, group_id)
         for row in cursor:
             groups.append(row.copy())
     except Exception as ex:
         print(ex)
-        return -1
+        return -1, None
     finally:
         cursor.close()
         conn.close()
     
-    return groups
+    return 0, groups
+
+def get_groups(user_id):
+    conn   = db_connect()
+    cursor = conn.cursor(dictionary=True, buffered=True)
+    query  = ("SELECT * FROM GroupMembers "
+            "WHERE user_id= " + str(user_id))
+    groups = []
+    
+    try:
+        cursor.execute(query)
+        for row in cursor:
+            groups.append(row.copy())
+    except Exception as ex:
+        print(ex)
+        return -1, None
+    finally:
+        cursor.close()
+        conn.close()
+    print(groups)
+    return 0, groups
 

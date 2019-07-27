@@ -18,7 +18,10 @@ def user_profile():
 
 def user_group():
     if roles.current_id > -1:
-        return db.get_groups(roles.current_id)
+        err, groups = db.get_total_groups(roles.current_id)
+        print(groups)
+        if err > -1:
+            return groups
     return None
 
 @app.route('/', methods=['GET'])
@@ -88,6 +91,23 @@ def createGroup():
             return render_template('newGroupOrder.html', error=1)
         return redirect(url_for('index'))
     return render_template('newGroupOrder.html', error=0)
+
+@app.route('/viewGroup', methods=['GET'])
+def viewGroup():
+    total = []
+    err, group = db.get_groups(roles.current_id)
+    if err == -1:
+        return render_template('viewGroupOrder.html', total=total)
+    err, order = db.get_orders(roles.current_id)
+    if err == -1:
+        return render_template('viewGroupOrder.html', total=total)
+    for i in range(len(group)):
+        group_id = group[i][0]
+        members = db.get_group_members(group_id)
+        admin = db.get_user(group[i][1])
+        entry = {'admin': admin[1], 'shop': order[i][4], 'site': order[i][5], 'location': order[i][3], 'deadline': order[i][2], 'num_mem': group[i][2], 'members': members}
+        total.append(entry)
+    return render_template('viewGroupOrder.html', total=total)
 
 @app.route('/search', methods=['POST','GET'])
 def search():

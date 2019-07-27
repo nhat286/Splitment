@@ -1,5 +1,6 @@
 footer{
-    position: absolute;
+    position: absolute; /* can also use relative */
     bottom: 0;
     width: 100%;
+    clear: both;
 }
