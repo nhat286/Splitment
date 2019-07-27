@@ -103,18 +103,24 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
       </div>
+      {% if searched %}
+        {% for order in orders %}
+          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+            <img src="templates/icons/user.svg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+            <span class="w3-right w3-opacity">Active</span>
+            <h4 class="w3-margin-right">{{USER}} <i class="fa fa-star fa-fw w3-text-theme" id="profile-rating"></i>{{RATING}}</h4>
+            <hr class="w3-clear">
+            <p>Online Retailer: {{}}</p>
+            <p>Online Retailer URL: {{}}</p>
+            <p>Deadline: {{}}</p>
+            <p>Members: {{}}</p>
+            {% if login %}
+              <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
       
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="templates/icons/user.svg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">16 min ago</span>
-        <h4 class="w3-margin-right">User <i class="fa fa-star fa-fw w3-text-theme" id="profile-rating"></i>5</h4>
-        <hr class="w3-clear">
-        <p>Online Retailer:</p>
-        <p>Online Retailer URL:</p>
-        <p>Deadline:</p>
-        <p>Members:</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
-      </div>
       
     <!-- End Middle Column -->
     </div>
