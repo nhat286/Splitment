@@ -17,7 +17,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Splitment</a>
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Splitment</a>
   
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications" id="navbar-notif"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">1</span></button>     
@@ -28,10 +28,10 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
   <button class="w3-button w3-padding-large" title="Help" id="navbar-help"><i class="fa fa-question"></i></button>
 
-  <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
+  <a href="/logout" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
     <i class="fa fa-power-off fa-fw w3-margin-right w3-text-theme"></i>Logout
   </a>
-  <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
+  <a href="login" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
     <i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Login/Signup
   </a>
  </div>
@@ -42,6 +42,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
   <!-- The Grid -->
   <div class="w3-row">
+    {% if user %}
     <!-- Left Column -->
     <div class="w3-col m3" id="user-profile">
         <!-- Profile -->
@@ -50,10 +51,10 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
            <h4 class="w3-center">My Profile</h4>
            <p class="w3-center"><img src="templates/icons/user.svg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
            <hr>
-           <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme" id="profile-name"></i>Name</p>
-           <p><i class="fa fa-paperclip fa-fw w3-margin-right w3-text-theme" id="profile-email"></i>Email</p>
-           <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme" id="profile-address"></i>Address</p>
-           <p><i class="fa fa-star fa-fw w3-margin-right w3-text-theme" id="profile-rating"></i>Rating</p>
+           <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme" id="profile-name"></i>{{user.name}}</p>
+           <p><i class="fa fa-paperclip fa-fw w3-margin-right w3-text-theme" id="profile-email"></i>{{user.email}}</p>
+           <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme" id="profile-address"></i>{{user.address}}</p>
+           <p><i class="fa fa-star fa-fw w3-margin-right w3-text-theme" id="profile-rating"></i>{{user.rating}}</p>
           </div>
         </div>
         <br>
@@ -77,6 +78,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <button class="w3-button w3-block w3-left-align"><i class="fa fa-plus fa-fw w3-margin-right"></i>New Group Order</button>
         </div>
       <!-- End Left Column -->
+      {% endif %}
       </div>
     
     <!-- Middle Column -->

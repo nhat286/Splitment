@@ -17,7 +17,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Splitment</a>
+  <a href="/" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Splitment</a>
   
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications" id="navbar-notif"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">1</span></button>     
@@ -28,7 +28,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
   <button class="w3-button w3-padding-large" title="Help" id="navbar-help"><i class="fa fa-question"></i></button>
 
-  <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
+  <a href="/logout" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
     <i class="fa fa-power-off fa-fw w3-margin-right w3-text-theme"></i>Logout
   </a>
   <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
@@ -53,9 +53,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
               <h3 class="w3-opacity">Log in to begin...</h3>
               <!-- <p contenteditable="true" class="w3-border w3-padding" ></p>
               <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
-              <input class="w3-input" type="text" placeholder="Email" id="login-email" display="inline-block"></input>
-              <input class="w3-input" type="text" placeholder="Password" id="login-password"></input>
-              <button type="button" class="w3-button w3-theme" id="login-input-btn"><i class="fa fa-arrow-circle-right"></i>  Login</button>
+              <form method="POST" action="login">
+                <input class="w3-input" type="text" placeholder="Email" id="login-email" name="login-email" display="inline-block"></input>
+                <input class="w3-input" type="password" placeholder="Password" id="login-password" name="login-password"></input>
+                <button type="submit" class="w3-button w3-theme" id="login-input-btn"><i class="fa fa-arrow-circle-right"></i>  Login</button>
+              </form>
             </div>
           </div>
         </div>
@@ -68,12 +70,14 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
               <h3 class="w3-opacity">Sign up to begin...</h3>
               <!-- <p contenteditable="true" class="w3-border w3-padding" ></p>
               <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
-              <input class="w3-input" type="text" placeholder="Name" id="signup-name" display="inline-block"></input>
-              <input class="w3-input" type="email" placeholder="Email" id="signup-email" display="inline-block"></input>
-              <input class="w3-input" type="text" placeholder="Address" id="signup-address"></input>
-              <input class="w3-input" type="password" placeholder="Password" id="signup-password"></input>
-              <input class="w3-input" type="password" placeholder="Confirm Password" id="signup-password-confirm"></input>
-              <button type="button" class="w3-button w3-theme" id="signup-input-btn"><i class="fa fa-arrow-circle-right"></i>  Signup</button>
+              <form method="POST" action="signup">
+                <input class="w3-input" type="text" placeholder="Name" id="signup-name" name="signup-name" display="inline-block"></input>
+                <input class="w3-input" type="email" placeholder="Email" id="signup-email" name="signup-email" display="inline-block"></input>
+                <input class="w3-input" type="text" placeholder="Address" id="signup-address" name="signup-address"></input>
+                <input class="w3-input" type="password" placeholder="Password" id="signup-password" name="signup-password"></input>
+                <input class="w3-input" type="password" placeholder="Confirm Password" id="signup-password-confirm" name="signup-password-confirm"></input>
+                <button type="submit" class="w3-button w3-theme" id="signup-input-btn"><i class="fa fa-arrow-circle-right"></i>  Signup</button>
+              </form>
             </div>
           </div>
         </div>

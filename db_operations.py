@@ -39,7 +39,26 @@ def check_login(email, password):
         cursor.execute(query, (email, password))
         rows = cursor.fetchone()
         if rows:
-            return rows[0]
+            return rows[0], rows
+        else:
+            return -1, None
+    except Exception as ex:
+        print(ex)
+        return -1, None
+    finally:
+        cursor.close()
+        conn.close()
+
+def get_user(user_id):
+    conn   = db_connect()
+    cursor = conn.cursor(buffered=True)
+    query  = ("SELECT * from Users "
+            "WHERE id=%s ")
+    try:
+        cursor.execute(query, (user_id))
+        rows = cursor.fetchone()
+        if rows:
+            return rows
         else:
             return -1
     except Exception as ex:
