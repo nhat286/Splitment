@@ -19,7 +19,7 @@ def user_profile():
 def user_group():
     if roles.current_id > -1:
         err, groups = db.get_total_groups(roles.current_id)
-        print(groups)
+        #print(groups)
         if err > -1:
             return groups
     return None
@@ -37,7 +37,7 @@ def login():
         roles.current_id, roles.current_user = db.check_login(email, password)
         if roles.current_id == -1:
             return render_template('login.html', error=1)
-        print(roles.current_user)
+        #print(roles.current_user)
         return redirect(url_for('index'))
     return render_template('login.html', error=0)
 
@@ -51,9 +51,9 @@ def signup():
         user = {'email': email, 'password': password, 'name': name, 'address': address, 'rating': 0}
         account = db.add_user(user)
         if account == -1:
-            return render_template('signup.html', error=1)
+            return render_template('login.html', error=1)
         return redirect(url_for('index'))
-    return render_template('signup.html', error=0)
+    return render_template('login.html', error=0)
 
 
 
@@ -95,18 +95,27 @@ def createGroup():
 @app.route('/viewGroup', methods=['GET'])
 def viewGroup():
     total = []
-    err, group = db.get_groups(roles.current_id)
+    err, group = db.get_total_groups(roles.current_id)
+    print(group)
     if err == -1:
         return render_template('viewGroupOrder.html', total=total)
     err, order = db.get_orders(roles.current_id)
+    print(order)
     if err == -1:
         return render_template('viewGroupOrder.html', total=total)
     for i in range(len(group)):
-        group_id = group[i][0]
-        members = db.get_group_members(group_id)
-        admin = db.get_user(group[i][1])
-        entry = {'admin': admin[1], 'shop': order[i][4], 'site': order[i][5], 'location': order[i][3], 'deadline': order[i][2], 'num_mem': group[i][2], 'members': members}
+        group_id = group[i]['id']
+        err, members = db.get_group_members(group_id)
+        if err == -1:
+            continue
+        err, admin = db.get_user(group[i]['admin'])
+        print(admin)
+        if err == -1:
+            continue
+        print(members)
+        entry = {'admin': admin[1], 'shop': order[i]['retail_name'], 'site': order[i]['retail_link'], 'location': order[i]['location'], 'deadline': order[i]['deadline'], 'num_mem': group[i]['member_count'], 'members': members}
         total.append(entry)
+    print(total)
     return render_template('viewGroupOrder.html', total=total)
 
 @app.route('/search', methods=['POST','GET'])

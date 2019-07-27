@@ -53,9 +53,9 @@ def get_user(id):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
     query  = ("SELECT * from Users "
-            "WHERE id=%(id)s ")
+            "WHERE id= " + str(id))
     try:
-        cursor.execute(query, id)
+        cursor.execute(query)
         rows = cursor.fetchone()
         if rows:
             return 0, rows
@@ -161,11 +161,11 @@ def get_orders(user_id):
     query  = ("SELECT * FROM Orders "
             "WHERE group_id=("
             "SELECT group_id FROM GroupMembers "
-            "WHERE user_id=%(user_id)s)")
+            "WHERE user_id= " + str(user_id) + " )")
     orders = []
     
     try:
-        cursor.execute(query, user_id)
+        cursor.execute(query)
         for row in cursor:
             orders.append(row.copy())
     except Exception as ex:
@@ -213,13 +213,13 @@ def get_group_members(group_id):
     conn   = db_connect()
     cursor = conn.cursor(dictionary=True, buffered=True)
     query  = ("SELECT * FROM GroupMembers "
-            "WHERE group_id=%(group_id)s")
-    groups = []
+            "WHERE group_id= " + str(group_id))
+    group_members = []
     
     try:
-        cursor.execute(query, group_id)
+        cursor.execute(query)
         for row in cursor:
-            groups.append(row.copy())
+            group_members.append(row.copy())
     except Exception as ex:
         print(ex)
         return -1, None
@@ -227,7 +227,13 @@ def get_group_members(group_id):
         cursor.close()
         conn.close()
     
-    return 0, groups
+    members = []
+    for i in group_members:
+        err, user = get_user(i['user_id'])
+        if err > -1:
+            members.append(user[1])
+    
+    return 0, members
 
 def get_groups(user_id):
     conn   = db_connect()
