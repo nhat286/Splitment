@@ -5,7 +5,7 @@ def db_connect():
         host="localhost",
         user="root",
         password="password",
-        database="GroupBuy"
+        database="Splitment"
     )
     return conn
 
@@ -64,7 +64,7 @@ def add_group(group):
         group_id = insert_id
         query  = ("INSERT INTO GroupMembers "
                 "(group_id, user_id) "
-                "VALUES (%(group_id)s, %(admin)s) ")
+                "VALUES (%s, %s) ")
         cursor.execute(query, (group_id, group['admin']))
         insert_id = cursor.lastrowid
         print("Inserted user with id: " + str(insert_id))

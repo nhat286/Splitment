@@ -9,18 +9,18 @@ def create_database():
 
 	init_cursor = init_db.cursor()
 
-	init_cursor.execute("DROP DATABASE IF EXISTS GroupBuy")
-	print("Old GroupBuy database removed (if it existed)")
+	init_cursor.execute("DROP DATABASE IF EXISTS Splitment")
+	print("Old Splitment database removed (if it existed)")
 
-	init_cursor.execute("CREATE DATABASE GroupBuy")
-	print("GroupBuy database created")
+	init_cursor.execute("CREATE DATABASE Splitment")
+	print("Splitment database created")
 
 def create_tables():
 	mydb = mysql.connector.connect(
 		host="localhost",
 		user="root",
 		password="password",
-        database="GroupBuy"
+        database="Splitment"
 	)
 
 	mycursor = mydb.cursor()
