@@ -3,13 +3,13 @@
 <title>Splitment</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <link rel="stylesheet" href="css/extra.css">
+<link rel="stylesheet" href="css/extra.css">
 <link rel="stylesheet" href="css/w3.css"> 
-<link rel="stylesheet" href="css/w3-theme.css"> -->
+<link rel="stylesheet" href="css/w3-theme.css">
 <!-- https://www.w3schools.com/w3css/4/w3.css -->
-<link rel="stylesheet" href="templates/css/extra.css">
+<!-- <link rel="stylesheet" href="templates/css/extra.css">
 <link rel="stylesheet" href="templates/css/w3.css"> 
-<link rel="stylesheet" href="templates/css/w3-theme.css">
+<link rel="stylesheet" href="templates/css/w3-theme.css"> -->
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -106,21 +106,50 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
       {% if searched %}
-        {% for order in orders %}
-          <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-            <img src="templates/icons/user.svg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-            <span class="w3-right w3-opacity">Active</span>
-            <h4 class="w3-margin-right">{{USER}} <i class="fa fa-star fa-fw w3-text-theme" id="profile-rating"></i>{{RATING}}</h4>
-            <hr class="w3-clear">
-            <p>Online Retailer: {{}}</p>
-            <p>Online Retailer URL: {{}}</p>
-            <p>Deadline: {{}}</p>
-            <p>Members: {{}}</p>
-            {% if login %}
-              <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
-            {% endif %}
-          </div>
-        {% endfor %}
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="icons/kermit.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">Active</span>
+          <h4 class="w3-margin-right">Kermit le Frog<i class="fa fa-star fa-fw w3-text-theme" id="profile-rating"></i>4.5</h4>
+          <hr class="w3-clear">
+          <p>Online Retailer: Apple Airpods</p>
+          <p>Online Retailer URL: www.apple-airpods.com</p>
+          <p>Location: Sesame Street, LA</p>
+          <p>Deadline: 30/07/2019</p>
+          <p>Members: 5</p>
+          {% if login %}
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
+          {% endif %}
+        </div>
+        <br>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="icons/bob.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">Active</span>
+          <h4 class="w3-margin-right">Bob<i class="fa fa-star fa-fw w3-text-theme" id="profile-rating"></i>5</h4>
+          <hr class="w3-clear">
+          <p>Online Retailer: Y33ZY</p>
+          <p>Online Retailer URL: www.y33zy.com</p>
+          <p>Location: UNSW Sydney, NSW 2052</p>
+          <p>Deadline: 02/08/2019</p>
+          <p>Members: 3</p>
+          {% if login %}
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
+          {% endif %}
+        </div>
+        <br>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+          <img src="icons/raccoon.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+          <span class="w3-right w3-opacity">Active</span>
+          <h4 class="w3-margin-right">Three Raccoons <i class="fa fa-star fa-fw w3-text-theme" id="profile-rating"></i>2</h4>
+          <hr class="w3-clear">
+          <p>Online Retailer: Trenchcoats-R-Us</p>
+          <p>Online Retailer URL: www.trenchcoats-r-us.com</p>
+          <p>Location: Tree Lane, Forest</p>
+          <p>Deadline: 16/08/2019</p>
+          <p>Members: 10</p>
+          {% if login %}
+            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-cart-plus" id="go-join"></i>  Join</button> 
+          {% endif %}
+        </div>
       {% endif %}
       
       
