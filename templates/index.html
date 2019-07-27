@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<title>Splitment</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css"> <!-- https://www.w3schools.com/w3css/4/w3.css -->
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+</style>
+<body class="w3-theme-l5">
+
+<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Splitment</a>
+  
+  <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button w3-padding-large" title="Notifications" id="navbar-notif"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">1</span></button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px" id="navbar-notif-dropdown">
+      <a href="#" class="w3-bar-item w3-button">Welcome! Click on Help to learn more.</a>
+    </div>
+  </div>
+
+  <button class="w3-button w3-padding-large" title="Help" id="navbar-help"><i class="fa fa-question"></i></button>
+
+  <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
+    <i class="fa fa-power-off fa-fw w3-margin-right w3-text-theme"></i>Logout
+  </a>
+  <a href="#" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
+    <i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Login/Signup
+  </a>
+ </div>
+ <!-- End Navbar -->
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3" id="user-profile">
+        <!-- Profile -->
+        <div class="w3-card w3-round w3-white">
+          <div class="w3-container">
+           <h4 class="w3-center">My Profile</h4>
+           <p class="w3-center"><img src="icons/user.svg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+           <hr>
+           <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme" id="profile-name"></i>Name</p>
+           <p><i class="fa fa-paperclip fa-fw w3-margin-right w3-text-theme" id="profile-email"></i>Email</p>
+           <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme" id="profile-address"></i>Address</p>
+           <p><i class="fa fa-star fa-fw w3-margin-right w3-text-theme" id="profile-rating"></i>Rating</p>
+          </div>
+        </div>
+        <br>
+        
+        <!-- Accordion -->
+        <div class="w3-card w3-round" >
+          <div class="w3-white">
+            <button onclick="myFunction('profile-groups-curr')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Current Groups</button>
+            <div id="profile-groups-curr" class="w3-hide w3-container">
+              <p>Nothing yet.</p>
+            </div>
+            <button onclick="myFunction('profile-groups-past')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Past Groups</button>
+            <div id="profile-groups-past" class="w3-hide w3-container">
+              <p>Nothing yet.</p>
+            </div>
+          </div>      
+        </div>
+        <br>
+
+        <div class="w3-card w3-round w3-white">
+          <button class="w3-button w3-block w3-left-align"><i class="fa fa-plus fa-fw w3-margin-right"></i>New Group Order</button>
+        </div>
+      <!-- End Left Column -->
+      </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m8" id="search">
+    
+      <div class="w3-row-padding">
+        <div class="w3-col m12">
+          <div class="w3-card w3-round w3-white">
+            <div class="w3-container w3-padding">
+              <h3 class="w3-opacity">Welcome to Splitment!</h3>
+              <h5 class="w3-opacity">We split the payment of your shipment. Find a group order below or start your own!</h5>
+              <!-- <p contenteditable="true" class="w3-border w3-padding" ></p>
+              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
+              <input class="w3-input" type="text" placeholder="Your location..." id="search-input-loc"></input>
+              <input class="w3-input" type="text" placeholder="Your item..." id="search-input-item"></input>
+              <button type="button" class="w3-button w3-theme" id="search-input-btn"><i class="fa fa-search"></i>  Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <img src="icons/user.svg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+        <span class="w3-right w3-opacity">16 min ago</span>
+        <h4>Jane Doe</h4><h6>Rating: 5</h6>
+        <br>
+        <hr class="w3-clear">
+        <p>Website:</p>
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+      </div>
+      
+    <!-- End Middle Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16">
+  <h5>Splitment</h5>
+</footer>
+
+<footer class="w3-container w3-theme-d5">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+ 
+<script>
+// Accordion
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+    x.previousElementSibling.className += " w3-theme-d1";
+  } else { 
+    x.className = x.className.replace("w3-show", "");
+    x.previousElementSibling.className = 
+    x.previousElementSibling.className.replace(" w3-theme-d1", "");
+  }
+}
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+</body>
+</html> 
