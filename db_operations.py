@@ -5,17 +5,17 @@ def db_connect():
         host="localhost",
         user="root",
         password="password",
-        database="SIDRAT"
+        database="GroupBuy"
     )
     return conn
 
-# user = { username, password, email, name }
+# user = { email, password, name, address }
 def add_user(user):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
     query  = ("INSERT INTO Users "
-            "(username, password, email, name) "
-            "VALUES (%(username)s, %(password)s, %(email)s, %(name)s) ")
+            "(email, password, name, address, rating) "
+            "VALUES (%(email)s, %(password)s, %(name)s, %(address)s, %(rating)s) ")
     try:
         cursor.execute(query, user)
         insert_id = cursor.lastrowid
@@ -29,14 +29,14 @@ def add_user(user):
         cursor.close()
         conn.close()
 
-# login = { username, password }
-def check_login(username, password):
+# login = { email, password }
+def check_login(email, password):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
     query  = ("SELECT * from Users "
-            "WHERE username=%s AND password=%s ")
+            "WHERE email=%s AND password=%s ")
     try:
-        cursor.execute(query, (username, password))
+        cursor.execute(query, (email, password))
         rows = cursor.fetchone()
         if rows:
             return rows[0]
@@ -49,15 +49,23 @@ def check_login(username, password):
         cursor.close()
         conn.close()
 
-# article = { user_id, url, headline }
-def save_article(article):
+# group = { admin, member_count, max_member }
+def add_group(group):
     conn   = db_connect()
     cursor = conn.cursor(buffered=True)
-    query  = ("INSERT INTO Articles "
-            "(user_id, url, headline, text, date) "
-            "VALUES (%(user_id)s, %(url)s, %(headline)s, %(text)s, %(date)s) ")
+    query  = ("INSERT INTO Groups "
+            "(admin, member_count, max_member) "
+            "VALUES (%(admin)s, %(member_count)s, %(max_member)s) ")
     try:
-        cursor.execute(query, article)
+        cursor.execute(query, group)
+        insert_id = cursor.lastrowid
+        print("Inserted user with id: " + str(insert_id))
+        conn.commit()
+        group_id = insert_id
+        query  = ("INSERT INTO GroupMembers "
+                "(group_id, user_id) "
+                "VALUES (%(group_id)s, %(admin)s) ")
+        cursor.execute(query, (group_id, group['admin']))
         insert_id = cursor.lastrowid
         print("Inserted user with id: " + str(insert_id))
         conn.commit()
@@ -69,16 +77,75 @@ def save_article(article):
         cursor.close()
         conn.close()
 
-def get_articles(user_id):
+def add_member(group, member):
+    conn   = db_connect()
+    cursor = conn.cursor(buffered=True)
+    query  = ("INSERT INTO GroupMembers "
+            "(group_id, user_id) "
+            "VALUES (%(group_id)s, %(user_id)s) ")
+    try:
+        cursor.execute(query, (group, member))
+        insert_id = cursor.lastrowid
+        print("Inserted user with id: " + str(insert_id))
+        conn.commit()
+        return insert_id
+    except Exception as ex:
+        print(ex)
+        return -1
+    finally:
+        cursor.close()
+        conn.close()
+
+# shop = { location, name, link }
+def add_order(group, shop, deadline):
+    conn   = db_connect()
+    cursor = conn.cursor(buffered=True)
+    query  = ("INSERT INTO Orders "
+            "(group_id, deadline, location, retail_name, retail_link) "
+            "VALUES (%(group_id)s, %(deadline)s, %(location)s, %(retail_name)s, %(retail_link)s) ")
+    try:
+        cursor.execute(query, (group, deadline, shop))
+        insert_id = cursor.lastrowid
+        print("Inserted user with id: " + str(insert_id))
+        conn.commit()
+        return insert_id
+    except Exception as ex:
+        print(ex)
+        return -1
+    finally:
+        cursor.close()
+        conn.close()
+
+# item = { order_id, item_name, item_link }
+def add_item(user, item):
+    conn   = db_connect()
+    cursor = conn.cursor(buffered=True)
+    query  = ("INSERT INTO UserItems "
+            "(user_id, order_id, item_name, item_link) "
+            "VALUES (%(user_id)s, %(order_id)s, %(item_name)s, %(item_link)s) ")
+    try:
+        cursor.execute(query, (user, item))
+        insert_id = cursor.lastrowid
+        print("Inserted user with id: " + str(insert_id))
+        conn.commit()
+        return insert_id
+    except Exception as ex:
+        print(ex)
+        return -1
+    finally:
+        cursor.close()
+        conn.close()
+
+def get_orders():
     conn   = db_connect()
     cursor = conn.cursor(dictionary=True, buffered=True)
-    query  = ("SELECT * FROM Articles WHERE user_id=%(user_id)s")
-    articles = []
+    query  = ("SELECT * FROM Orders")
+    orders = []
     
     try:
-        cursor.execute(query, user_id)
+        cursor.execute(query)
         for row in cursor:
-            articles.append(row.copy())
+            orders.append(row.copy())
     except Exception as ex:
         print(ex)
         return -1
@@ -86,53 +153,24 @@ def get_articles(user_id):
         cursor.close()
         conn.close()
     
-    return articles
+    return orders
 
-def remove_saved_article(article):
-    pass
-
-# subscription = { user_id, start_date, key_terms, location }
-def add_subscription(subscription):
+def get_groups():
     conn   = db_connect()
-    cursor = conn.cursor(buffered=True)
-    query  = ("INSERT INTO Subscriptions "
-            "(user_id, start_date, key_terms, location) "
-            "VALUES (%(user_id)s, %(start_date)s, %(key_terms)s, %(location)s) ")
+    cursor = conn.cursor(dictionary=True, buffered=True)
+    query  = ("SELECT * FROM Groups")
+    groups = []
+    
     try:
-        cursor.execute(query, subscription)
-        insert_id = cursor.lastrowid
-        print("Inserted user with id: " + str(insert_id))
-        conn.commit()
-        return insert_id
+        cursor.execute(query)
+        for row in cursor:
+            groups.append(row.copy())
     except Exception as ex:
         print(ex)
         return -1
     finally:
         cursor.close()
         conn.close()
+    
+    return groups
 
-#####
-def update_subscription():
-    pass
-
-def add_notification(article):
-    conn   = db_connect()
-    cursor = conn.cursor(buffered=True)
-    query  = ("INSERT INTO Notifications "
-            "(user_id, url) "
-            "VALUES (%(user_id)s, %(url)s) ")
-    try:
-        cursor.execute(query, article)
-        insert_id = cursor.lastrowid
-        print("Inserted user with id: " + str(insert_id))
-        conn.commit()
-        return insert_id
-    except Exception as ex:
-        print(ex)
-        return -1
-    finally:
-        cursor.close()
-        conn.close()
-
-def update_notification():
-    pass

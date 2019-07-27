@@ -39,9 +39,9 @@ def create_tables():
 
 	mycursor.execute("CREATE TABLE Users"
 		" (id INT AUTO_INCREMENT PRIMARY KEY,"
-		" name VARCHAR(255),"
-		" password VARCHAR(255),"
 		" email VARCHAR(255),"
+		" password VARCHAR(255),"
+		" name VARCHAR(255),"
 		" address VARCHAR(255),"
 		" rating FLOAT
                 " UNIQUE(email))")
