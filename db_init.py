@@ -9,18 +9,18 @@ def create_database():
 
 	init_cursor = init_db.cursor()
 
-	init_cursor.execute("DROP DATABASE IF EXISTS GroupBuy")
-	print("Old GroupBuy database removed (if it existed)")
+	init_cursor.execute("DROP DATABASE IF EXISTS Splitment")
+	print("Old Splitment database removed (if it existed)")
 
-	init_cursor.execute("CREATE DATABASE GroupBuy")
-	print("GroupBuy database created")
+	init_cursor.execute("CREATE DATABASE Splitment")
+	print("Splitment database created")
 
 def create_tables():
 	mydb = mysql.connector.connect(
 		host="localhost",
 		user="root",
 		password="password",
-        database="GroupBuy"
+        database="Splitment"
 	)
 
 	mycursor = mydb.cursor()
@@ -43,7 +43,7 @@ def create_tables():
 		" password VARCHAR(255),"
 		" name VARCHAR(255),"
 		" address VARCHAR(255),"
-		" rating FLOAT
+		" rating FLOAT,"
                 " UNIQUE(email))")
 	print("created Users table")
 
@@ -62,7 +62,7 @@ def create_tables():
 		" location VARCHAR(255),"
 		" retail_name VARCHAR(255),"
 		" retail_link VARCHAR(255),"
-		" FOREIGN KEY (group_id) REFERENCES Groups(id)),")
+		" FOREIGN KEY (group_id) REFERENCES Groups(id))")
 	print("created Orders table")
 
 	mycursor.execute("CREATE TABLE UserItems"
@@ -71,16 +71,16 @@ def create_tables():
 		" order_id INT,"
 		" item_name VARCHAR(255),"
 		" item_link VARCHAR(255),"
-		" FOREIGN KEY (user_id) REFERENCES Users(id)),"
-		" FOREIGN KEY (order_id) REFERENCES Orders(id)),")
+		" FOREIGN KEY (user_id) REFERENCES Users(id),"
+		" FOREIGN KEY (order_id) REFERENCES Orders(id))")
 	print("created UserItems table")
 
 	mycursor.execute("CREATE TABLE GroupMembers"
 		" (id INT AUTO_INCREMENT PRIMARY KEY,"
 		" group_id INT,"
 		" user_id INT,"
-		" FOREIGN KEY (user_id) REFERENCES Users(id)),"
-		" FOREIGN KEY (group_id) REFERENCES Groups(id)),")
+		" FOREIGN KEY (user_id) REFERENCES Users(id),"
+		" FOREIGN KEY (group_id) REFERENCES Groups(id))")
 	print("created GroupMembers table")
 
 	'''

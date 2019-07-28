@@ -1,0 +1,9 @@
+footer{
+    position: relative; /* can also use relative absolute */
+    bottom: 0;
+    width: 100%;
+    clear: both;
+    margin-top: 250px;
+    left: 0;
+    padding-top: 10px;
+}
