@@ -38,9 +38,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     <a href="logout" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout" id="navbar-logout">
       <i class="fa fa-power-off fa-fw w3-margin-right w3-text-theme"></i>Logout
     </a>
+    {% if user == None %}
     <a href="login" class="w3-margin-right w3-text-theme w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Login/Signup" id="navbar-login">
       <i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Login/Signup
     </a>
+    {% endif %}
   </div>
   <!-- End Navbar -->
   </div>

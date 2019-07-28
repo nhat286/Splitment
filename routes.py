@@ -26,6 +26,7 @@ def user_group():
 
 @app.route('/', methods=['GET'])
 def index():
+    print(user_profile())
     return render_template('index.html', user=user_profile(), groups=user_group())
 
 
