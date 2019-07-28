@@ -121,7 +121,10 @@ def viewGroup():
 @app.route('/search', methods=['POST','GET'])
 def search():
     if request.method=='POST':
-        return render_template('', result=result)
+        if roles.current_user != None:
+            return render_template('index.html', searched=1, login=1)
+        else:
+            return render_template('index.html', searched=1, login=0)
     return redirect('/')
 
 @app.route('/logout', methods=['GET'])
