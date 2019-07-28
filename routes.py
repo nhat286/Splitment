@@ -22,7 +22,7 @@ def user_group():
         #print(groups)
         if err > -1:
             return groups
-    return None
+    return []
 
 @app.route('/', methods=['GET'])
 def index():
@@ -122,10 +122,14 @@ def viewGroup():
 def search():
     if request.method=='POST':
         if roles.current_user != None:
-            return render_template('index.html', searched=1, login=1)
+            return render_template('index.html', searched=1, login=1, user=user_profile())
         else:
-            return render_template('index.html', searched=1, login=0)
-    return redirect('/')
+            return render_template('index.html', searched=1, login=0, user=user_profile())
+    return redirect(url_for('index'))
+
+@app.route('/help', methods=['GET'])
+def help():
+    return render_template('help.html')
 
 @app.route('/logout', methods=['GET'])
 def logout():
