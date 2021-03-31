@@ -11,7 +11,7 @@ relativetimebuilder==0.2.0
 six==1.12.0
 Werkzeug==0.14.1
 mysql-connector-python==8.0.15
-lxml==4.3.3
+lxml==4.6.3
 requests==2.21.0
 flask-login==0.4.1
 bs4==0.0.1
